@@ -7,6 +7,8 @@
 <div class="card cardo">
 <div class="card-header blug">
 <b>Profil</b>
+<!-- {{infous.email}} -->
+<!-- <button @click="hapus">clear storage</button> -->
 </div>
 <div class="card-body tel">
 <b-container class="bv-example-row">
@@ -16,19 +18,19 @@
 <div class="form-group row">
 <label for="Nama" class="col-sm-3 col-form-label">Nama</label>
 <div class="col-sm-9">
-<h4 class="det">{{infos.nama}}</h4>
+<h4 class="det">{{infous.nama}}</h4>
 </div>
 </div>
 <div class="form-group row">
 <label for="Email" class="col-sm-3 col-form-label">Email</label>
 <div class="col-sm-9">
-<h4>{{infos.email}}</h4>
+<h4>{{infous.email}}</h4>
 </div>
 </div>
 <div class="form-group row">
 <label for="Usn" class="col-sm-3 col-form-label">Username</label>
 <div class="col-sm-9">
-<h4>{{infos.username}}</h4>
+<h4>{{infous.username}}</h4>
 </div>
 </div>
 <div class="form-group row">
@@ -43,13 +45,13 @@
 <div class="form-group row">
 <label for="Usn" class="col-sm-3 col-form-label">Asal</label>
 <div class="col-sm-9">
-<h4 class="det">{{infos.kota[0]}}</h4>
+<h4 class="det">{{infous.kota}}</h4>
 </div>
 </div>
 <div class="form-group row">
 <label for="Usn" class="col-sm-3 col-form-label">Status</label>
 <div class="col-sm-9">
-<h4 class="det">{{infos.status[0]}}</h4>
+<h4 class="det">{{infous.status}}</h4>
 </div>
 </div>
 </form>
@@ -58,13 +60,13 @@
 <div class="form-group row">
 <label for="Usn" class="col-sm-3 col-form-label">Level</label>
 <div class="col-sm-9">
-<h4>{{infos.level}} of 3</h4>
+<h4>{{infous.level}} of 3</h4>
 </div>
 </div>
 <div class="form-group row">
 <label for="Usn" class="col-sm-3 col-form-label">Exp</label>
 <div class="col-sm-9">
-<h4>{{infos.exp}} of 300</h4>
+<h4>{{infous.expr}} of 300</h4>
 </div>
 </div>
 <div class="form-group row">
@@ -85,8 +87,8 @@
 <script>
 import Toolbar from './Toolbar.vue'
 import Footer from './Footer.vue'
-import axios from 'axios'
-const alamat = 'http://localhost:3000/members/'
+// import axios from 'axios'
+// const alamat = 'http://localhost:3000/members/'
 
 export default {
   name: 'Dashboard',
@@ -95,6 +97,7 @@ export default {
     'vfoot': Footer
   },
   data: () => ({
+    infous: [],
     form: {
       status: '',
       kota: '',
@@ -114,8 +117,11 @@ export default {
   },
   methods: {
     loadData: function () {
-      let asd = alamat + this.nilai
-      axios.get(asd).then(response => (this.infos = response.data))
+      const loggedIn = localStorage.getItem('user')
+      this.infous = JSON.parse(loggedIn)
+      // alert(loggedIn.email)
+      // let asd = alamat + this.nilai
+      // axios.get(asd).then(response => (this.infos = response.data))
     }
   }
 }

@@ -6,11 +6,11 @@
       <v-container align-center>
         <v-stepper v-model="e1" dark class="teal">
           <v-stepper-header>
-            <v-stepper-step :complete="e1 > 1" step="1">Materi</v-stepper-step>
+            <v-stepper-step :complete="e1 > 1" step="1">Test</v-stepper-step>
 
             <v-divider></v-divider>
 
-            <v-stepper-step :complete="e1 > 2" step="2">Test</v-stepper-step>
+            <v-stepper-step :complete="e1 > 2" step="2">Result</v-stepper-step>
           </v-stepper-header>
 
           <v-stepper-items>
@@ -19,13 +19,44 @@
               class="mb-5 anim"
               color="teal lighten-1"
               >
+              {{kunci}}
               <v-container grid-list-xs,sm,md,lg,xl>
-                <p v-for="i in dataS" :key="`${i}`">
-                  {{i.nomor}}. {{i.pertanyaan}}
-                </p>
+                <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
+                <b-form-radio-group id="radios2" v-model="pilih" name="radioSubComponent">
+                  <b-row style="text-align:center;">
+                    <b-col>
+                      <b-form-radio value="A">
+                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwA}}</label>
+                        <label v-else-if="dataR.kategori === 1">{{dataR.jwA}}</label>
+                      </b-form-radio>
+                    </b-col>
+                    <b-col>
+                      <b-form-radio value="B">
+                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwA}}</label>
+                        <label v-else-if="dataR.kategori === 1">{{dataR.jwB}}</label>
+                      </b-form-radio>
+                    </b-col>
+                    <b-col>
+                      <b-form-radio value="C">
+                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwC}}</label>
+                        <label v-else-if="dataR.kategori === 1">{{dataR.jwC}}</label>
+                      </b-form-radio>
+                    </b-col>
+                    <b-col>
+                      <b-form-radio value="D">
+                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwD}}</label>
+                        <label v-else-if="dataR.kategori === 1">{{dataR.jwD}}</label>
+                      </b-form-radio>
+                    </b-col>
+                  </b-row>
+                </b-form-radio-group>
+                <hr/>
+                <p align="center"><v-btn color="lime darken-1" small @click="cekL" :disabled="nex === 1">Berikut</v-btn></p>
+                <p align="center">Pilihan Saya: {{pilih}}</p>
+                <p align="center">Jawaban Saya : {{jawaban}}</p>
               </v-container>
             </v-card>
-              <v-btn color="teal darken-5" dark @click="e1 = 2">Lanjutkan</v-btn>
+              <v-btn color="teal darken-5" dark @click="validasi" :disabled="nex === 0">Lanjutkan</v-btn>
 
           </v-stepper-content>
 
@@ -35,20 +66,17 @@
             color="teal lighten-1"
             >
             <v-container grid-list-xs,sm,md,lg,xl>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <h2>Hasil Test Level 1</h2>
+              <p v-if="valid === 1">
+                Selamat anda telah menjawab semua soal dengan benar!. Silahkan klik selesai untuk mempelajari materi selanjutnya!
+              </p>
+              <p v-else-if="valid === 0">
+                Maaf, masih terdapat jawaban yang salah. Silahkan klik ulang
+              </p>
             </v-container>
           </v-card>
-          <v-btn
-          color="red"
-          @click="e1 = 3"
-          >
-          Lanjutkan
-        </v-btn>
+          <v-btn color="red" @click="ulangi" v-if="valid === 0">Ulang</v-btn>
+          <v-btn color="teal darken-5" @click="explus" v-else-if="valid === 1">Selesai</v-btn>
 
       </v-stepper-content>
     </v-stepper-items>
@@ -58,6 +86,7 @@
 </div>
 </template>
 <script>
+import router from '../../../router'
 import Toolbar from './../Toolbar.vue'
 import Footer from './../Footer.vue'
 import axios from 'axios'
@@ -72,7 +101,11 @@ export default {
   },
   data: () => ({
     nilai: 1,
-    akun: '5b8e3ae8e8d18816382c5438',
+    akun: '',
+    pilih: '',
+    jawaban: [],
+    valid: '',
+    kunci: [],
     infoku: [],
     sel: '',
     e1: 0,
@@ -87,8 +120,11 @@ export default {
   },
   methods: {
     loadData: function () {
-      let asw = Membs + this.akun
-      axios.get(asw).then(response => (this.infoku = response.data))
+      // let asw = Membs + this.akun
+      // axios.get(asw).then(response => (this.infoku = response.data))
+      const loggedIn = localStorage.getItem('user')
+      this.infous = JSON.parse(loggedIn)
+      this.akun = this.infous._id
       axios.get(testS).then(response => (this.dataS = response.data))
     },
     readData: function () {
@@ -96,10 +132,47 @@ export default {
       axios.get(asd).then(response => (this.dataR = response.data))
       // this.pdata = this.dataR.length
     },
+    cekL: function () {
+      if (this.pilih === '') {
+        alert('Jawaban masih kosong!')
+      } else {
+        this.jawaban.push(this.pilih)
+        this.kunci.push(this.dataR.kunci)
+        if (this.nilai >= this.dataS.length) {
+          this.nex = 1
+        } else {
+          this.nilai = this.nilai + 1
+          this.readData()
+          this.pilih = ''
+        }
+      }
+    },
+    ulangi: function () {
+      this.jawaban = []
+      this.nilai = 1
+      this.kunci = []
+      this.readData()
+      this.nex = 0
+      this.pilih = ''
+      this.e1 = 1
+    },
+    validasi: function () {
+      this.e1 = 2
+      const x1 = this.jawaban.join()
+      const x2 = this.kunci.join()
+      console.log(this.jawaban.toString() + '----------------' + this.kunci.toString())
+      if (x1 === x2) {
+        this.valid = 1
+        console.log('sama' + this.valid)
+      } else {
+        this.valid = 0
+        console.log('beda' + this.valid)
+      }
+    },
     explus: function () {
-      if (this.infoku.exp < 100) {
+      if (this.infous.expr < 100) {
         const value = {
-          exp: 100
+          expr: 100
         }
         axios({
           method: 'put',
@@ -109,12 +182,15 @@ export default {
         }).then(function (response) {
           if (response.status === 200) {
             console.log('Update Success')
+            localStorage.setItem('user', JSON.stringify(response.data))
+            router.replace('/dashboard/belajar')
           }
         }).catch(function (response) {
           console.log(response)
         })
       } else {
         alert('Terimakasih telah mengulang kembali')
+        router.replace('/dashboard/belajar')
       }
     }
   }

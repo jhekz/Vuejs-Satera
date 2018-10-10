@@ -50,7 +50,58 @@
 <input type="text" class="form-control sm" placeholder="contoh@email.com" v-model="form.email">
 </div>
 </div>
-<button class="btn cyan" @click="cek">Daftar</button>
+<!-- <button class="btn cyan" @click="cek">Daftar</button> -->
+<!-- <div class="text-xs-center"> -->
+<v-dialog v-model="dialog" width="500">
+<v-btn slot="activator" color="light-blue lighten-2" dark>
+Daftar
+</v-btn>
+
+<v-card>
+<v-card-title class="headline light-blue lighten-2" primary-title>
+Konfirmasi Data
+</v-card-title>
+
+<v-card-text>
+<b-row>
+  <b-col cols="4">Nama</b-col>
+  <b-col>{{form.nama}}</b-col>
+</b-row>
+<b-row>
+  <b-col cols="4">Status</b-col>
+  <b-col>{{form.status}}</b-col>
+</b-row>
+<b-row>
+  <b-col cols="4">Kota</b-col>
+  <b-col>{{form.kota}}</b-col>
+</b-row>
+<b-row>
+  <b-col cols="4">Username</b-col>
+  <b-col>{{form.username}}</b-col>
+</b-row>
+<b-row>
+  <b-col cols="4">Email</b-col>
+  <b-col>{{form.email}}</b-col>
+</b-row>
+<b-row>
+  <b-col cols="4">Password</b-col>
+  <b-col>{{form.password}}</b-col>
+</b-row>
+</v-card-text>
+
+<v-divider></v-divider>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+<v-btn color="red" dark flat @click="dialog = false">
+Batal
+</v-btn>
+<v-btn color="light-blue" dark flat @click="daftar">
+Kirim
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
 </form>
 </div>
 </div>
@@ -60,6 +111,9 @@
 </div>
 </template>
 <script>
+import router from '../router'
+import axios from 'axios'
+const Membs = 'http://localhost:3000/members'
 export default {
   data () {
     return {
@@ -97,6 +151,7 @@ export default {
         text: 'Selain Sumbawa'
       }
       ],
+      dialog: false,
       form: {
         nama: '',
         username: '',
@@ -115,6 +170,25 @@ export default {
       console.log(this.form.kota)
       console.log(this.form.email)
       console.log(this.form.password)
+    },
+    daftar: function () {
+      axios({
+        method: 'post',
+        url: Membs,
+        data: this.form,
+        config: { headers: {'Content-Type': 'application/json'} }
+      }).then(function (response) {
+        if (response.status === 200) {
+          alert('Daftar Berhasil!')
+          // console.log('Update Success')
+          // localStorage.setItem('user', JSON.stringify(response.data))
+          router.replace('/login')
+        } else {
+          alert('Daftar Gagal!' + response.data.errmsg)
+        }
+      }).catch(function (response) {
+        alert('Daftar Gagal!!' + '\n' + 'Email Sudah terdaftar')
+      })
     }
   }
 }

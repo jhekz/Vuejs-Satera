@@ -21,11 +21,11 @@
                 <b-form-radio value="D">{{dataR.jwD}}</b-form-radio>
               </b-form-radio-group>
               <!-- <p align="justify">{{pdata}}</p><br/> -->
-              <v-btn color="teal darken-5" dark :disabled="pdata >= 3" @click="lanjut">Lanjutkan</v-btn>
+              <v-btn color="teal darken-5" dark :disabled="nex === 1" @click="lanjut">Lanjutkan</v-btn>
             </div>
           </v-card>
         </v-container>
-        <v-btn color="teal" :disabled="pdata < 3" @click="explus" to="/dashboard/belajar">Selesai</v-btn>
+        <v-btn color="teal" :disabled="nex === 0" @click="explus">Selesai</v-btn>
       </v-card>
     </v-container>
   </v-content>
@@ -35,8 +35,10 @@
 import Toolbar from './../Toolbar.vue'
 import Footer from './../Footer.vue'
 import axios from 'axios'
-const belajarR = 'http://localhost:3000/belajars/'
+import router from '../../../router'
 const Membs = 'http://localhost:3000/members/'
+const belajarR = 'http://localhost:3000/belajars/'
+const belajarS = 'http://localhost:3000/belajars'
 export default {
   name: 'Konversi',
   components: {
@@ -45,12 +47,14 @@ export default {
   },
   data: () => ({
     nilai: 0,
-    akun: '5b8e3ae8e8d18816382c5438',
+    akun: '',
     infoku: [],
+    infous: [],
     sel: '',
     dialog: false,
     nex: 0,
     dataR: [],
+    dataS: [],
     pdata: 1
   }),
   mounted () {
@@ -59,9 +63,13 @@ export default {
   },
   methods: {
     loadData: function () {
-      let asw = Membs + this.akun
-      axios.get(asw).then(response => (this.infoku = response.data))
-      this.form = this.infoku
+      // let asw = Membs + this.akun
+      // axios.get(asw).then(response => (this.infoku = response.data))
+      // this.form = this.infoku
+      axios.get(belajarS).then(response => (this.dataS = response.data))
+      const loggedIn = localStorage.getItem('user')
+      this.infous = JSON.parse(loggedIn)
+      this.akun = this.infous._id
     },
     readData: function () {
       let asd = belajarR + this.nilai
@@ -71,10 +79,15 @@ export default {
     lanjut: function () {
       if (this.sel === this.dataR.kunci) {
         alert('Jawaban Benar!')
-        this.nilai += 1
-        this.pdata += 1
-        this.sel = ''
-        this.readData()
+        if (this.nilai >= this.dataS.length - 1) {
+          this.nex = 1
+        } else {
+          this.nilai += 1
+          // this.pdata += 1
+          this.nex = 0
+          this.sel = ''
+          this.readData()
+        }
       } else {
         alert('Jawaban Salah!')
         this.nilai = this.nilai
@@ -83,9 +96,9 @@ export default {
       }
     },
     explus: function () {
-      if (this.infoku.exp < 20) {
+      if (this.infous.expr < 20) {
         const value = {
-          exp: 20
+          expr: 20
         }
         axios({
           method: 'put',
@@ -95,12 +108,15 @@ export default {
         }).then(function (response) {
           if (response.status === 200) {
             console.log('Update Success')
+            localStorage.setItem('user', JSON.stringify(response.data))
+            router.replace('/dashboard/belajar')
           }
         }).catch(function (response) {
           console.log(response)
         })
       } else {
         alert('Terimakasih telah mengulang kembali')
+        router.replace('/dashboard/belajar')
       }
     }
   }

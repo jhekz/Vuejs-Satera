@@ -114,7 +114,7 @@
           <v-container grid-list-xs,sm,md,lg,xl>
             <h1 align="center">Selamat !!!</h1>
             <hr/>
-            <h3 align="center">Anda lebih teliti dalam membedakan aksara yang memiliki kesamaan</h3>
+            <h3 align="center">Anda telah lebih teliti dalam membedakan aksara yang memiliki kesamaan</h3>
             <p>Klik selesai untuk kembali ke menu belajar</p>
           </v-container>
           </v-card>
@@ -122,6 +122,7 @@
           <v-btn
           color="teal"
           @click="explus"
+          to="/dashboard/belajar"
           >
           Selesai
         </v-btn>
@@ -134,6 +135,7 @@
 </div>
 </template>
 <script>
+import router from '../../../router'
 import Toolbar from './../Toolbar.vue'
 import Footer from './../Footer.vue'
 import axios from 'axios'
@@ -146,7 +148,7 @@ export default {
   },
   data: () => ({
     e1: 0,
-    akun: '5b8e3ae8e8d18816382c5438',
+    akun: '',
     dialog: false,
     dataKon: '',
     infoku: [],
@@ -215,8 +217,11 @@ export default {
   },
   methods: {
     loadData: function () {
-      let asw = Membs + this.akun
-      axios.get(asw).then(response => (this.infoku = response.data))
+      // let asw = Membs + this.akun
+      // axios.get(asw).then(response => (this.infoku = response.data))
+      const loggedIn = localStorage.getItem('user')
+      this.infous = JSON.parse(loggedIn)
+      this.akun = this.infous._id
     },
     lanjut: function () {
       if (this.jawaban === this.soal[this.in1].benar) {
@@ -228,9 +233,9 @@ export default {
       }
     },
     explus: function () {
-      if (this.infoku.exp < 80) {
+      if (this.infous.expr < 80) {
         const value = {
-          exp: 80
+          expr: 80
         }
         axios({
           method: 'put',
@@ -240,12 +245,15 @@ export default {
         }).then(function (response) {
           if (response.status === 200) {
             console.log('Update Success')
+            localStorage.setItem('user', JSON.stringify(response.data))
+            router.replace('/dashboard/belajar')
           }
         }).catch(function (response) {
           console.log(response)
         })
       } else {
         alert('Terimakasih telah mengulang kembali')
+        router.replace('/dashboard/belajar')
       }
     }
   }

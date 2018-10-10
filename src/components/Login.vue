@@ -9,15 +9,15 @@
 <b>Login</b>
 </div>
 <div class="card-body">
-<b-form @submit.prevent="login">
+<b-form>
 <b-form-group label="E-mail" horizontal>
-<b-form-input type="email" placeholder="contoh@mail.com"></b-form-input>
+<b-form-input type="email" placeholder="contoh@mail.com" v-model="email"></b-form-input>
 </b-form-group>
 <b-form-group label="Password" horizontal>
-<b-form-input type="password"></b-form-input>
+<b-form-input type="password" v-model="password"></b-form-input>
 </b-form-group>
 <hr/>
-<b-button type="submit" class="cyan">Masuk</b-button>
+<b-button class="cyan" @click="login">Masuk</b-button>
 </b-form>
 </div>
 </div>
@@ -26,26 +26,67 @@
 </div>
 </div>
 </template>
-<style scoped>
-.cyan{
-background-color: #607D8B;
-color: white;
+<script>
+import router from '../router'
+import axios from 'axios'
+const alamat = 'http://localhost:3000/login'
+export default {
+  name: 'Login',
+  data: () => ({
+    email: '',
+    password: '',
+    result: []
+  }),
+  mounted () {
+    // this.login()
+  },
+  methods: {
+    login: function () {
+      const value = {
+        email: this.email,
+        password: this.password
+      }
+      axios.post(alamat, value)
+        // .then(response => (this.result = response.data))
+        .then(function (response) {
+          if (response.status === 200) {
+            // this.result = response.data
+            localStorage.setItem('user', JSON.stringify(response.data))
+            router.replace('dashboard/dashboard')
+            console.log(response.data)
+          } else {
+            console.log(response)
+          }
+        })
+        .catch(function (response) {
+          console.log(response)
+          alert('email/password salah atau belum terdaftar')
+        })
+      console.log(this.result)
+    }
+  }
 }
-.cardo:hover{
-box-shadow: 5px 5px 5px #607D8B;
-transition: 0.5s;
-position: relative;
+</script>
+<style scoped>
+.cyan {
+  background-color: #607d8b;
+  color: white;
+}
+.cardo:hover {
+  box-shadow: 5px 5px 5px #607d8b;
+  transition: 0.5s;
+  position: relative;
 }
 @keyframes move {
-from {
-left: -100%;
-}
-to {
-left: 0%;
-}
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
 }
 .mari {
-position: relative;
-animation: 1s move;
+  position: relative;
+  animation: 1s move;
 }
 </style>

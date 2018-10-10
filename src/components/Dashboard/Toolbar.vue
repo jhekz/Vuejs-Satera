@@ -56,7 +56,7 @@ class="teal lighten-1"
 <v-toolbar-title>Satera Jontal</v-toolbar-title>
 <v-spacer></v-spacer>
 <v-toolbar-items>
-<v-btn flat>
+<v-btn flat @click="hapus">
 <v-icon>settings_power</v-icon>
 <b>Keluar</b>
 </v-btn>
@@ -65,6 +65,7 @@ class="teal lighten-1"
 </div>
 </template>
 <script>
+import router from '../../router'
 var a = 1
 export default {
   name: '',
@@ -77,6 +78,12 @@ export default {
   methods: {
     as: function () {
       a = a + 1
+    },
+    hapus: function () {
+      if (window.confirm('Yakin ingin keluar?')) {
+        localStorage.clear()
+        router.replace('/login')
+      }
     }
   }
 }

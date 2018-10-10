@@ -119,7 +119,7 @@
           <v-container grid-list-xs,sm,md,lg,xl>
             <h1 align="center">Selamat !!!</h1>
             <hr/>
-            <h3 align="center">Anda telah berhasil mengenal keempat tanda baca dalam <i>Satera Jontal</i></h3>
+            <h3 align="center">Anda telah berhasil mengenal sebagian dari seluruh lambang <i>Satera Jontal</i></h3>
             <p>Klik selesai untuk kembali ke menu belajar</p>
           </v-container>
           </v-card>
@@ -140,6 +140,7 @@
 </div>
 </template>
 <script>
+import router from '../../../router'
 import Toolbar from './../Toolbar.vue'
 import Footer from './../Footer.vue'
 import axios from 'axios'
@@ -154,10 +155,11 @@ export default {
   },
   data: () => ({
     e1: 0,
-    akun: '5b8e3ae8e8d18816382c5438',
+    akun: '',
     dialog: false,
     dataKon: [],
     infoku: [],
+    infous: [],
     form: {
       exp: ''
     },
@@ -173,10 +175,13 @@ export default {
   },
   methods: {
     loadData: function () {
-      let asw = Membs + this.akun
+      // let asw = Membs + this.akun
       axios.get(Aksara).then(response => (this.dataKon = response.data))
-      axios.get(asw).then(response => (this.infoku = response.data))
-      this.form = this.infoku
+      // axios.get(asw).then(response => (this.infoku = response.data))
+      // this.form = this.infoku
+      const loggedIn = localStorage.getItem('user')
+      this.infous = JSON.parse(loggedIn)
+      this.akun = this.infous._id
     },
     readData: function () {
       let asd = AksaraR + this.nilai + this.nilai2
@@ -195,9 +200,9 @@ export default {
       }
     },
     explus: function () {
-      if (this.infoku.exp < 40) {
+      if (this.infous.expr < 40) {
         const value = {
-          exp: 40
+          expr: 40
         }
         axios({
           method: 'put',
@@ -207,12 +212,15 @@ export default {
         }).then(function (response) {
           if (response.status === 200) {
             console.log('Update Success')
+            localStorage.setItem('user', JSON.stringify(response.data))
+            router.replace('/dashboard/belajar')
           }
         }).catch(function (response) {
           console.log(response)
         })
       } else {
         alert('Terimakasih telah mengulang kembali')
+        router.replace('/dashboard/belajar')
       }
     }
   }

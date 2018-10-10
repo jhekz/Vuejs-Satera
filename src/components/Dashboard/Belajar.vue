@@ -18,7 +18,7 @@
               <div class="form-group row">
                 <label for="Usn" class="col-sm-3 col-form-label">exp</label>
                 <div class="col-sm-9">
-                  <div>{{infos.exp}}</div>
+                  <div>{{infos.expr}}</div>
                 </div>
               </div>
             </v-card-text>
@@ -64,7 +64,7 @@
                   class="text-center">
                   <p class="card-text">
                     Require : Level 1 & Exp 20
-                    <v-btn color="teal" small dark to="/learn/lixii" :disabled="infos.exp < 20">Mulai <v-icon>play_arrow</v-icon></v-btn>
+                    <v-btn color="teal" small dark to="/learn/lixii" :disabled="infos.expr < 20">Mulai <v-icon>play_arrow</v-icon></v-btn>
                   </p>
                 </b-card>
               </b-col>
@@ -77,7 +77,7 @@
                 class="text-center">
                 <p class="card-text">
                   Require : Level 1 & Exp 40
-                  <v-btn color="teal" to="/learn/lixiii" small dark :disabled="infos.exp < 40">Mulai <v-icon>play_arrow</v-icon></v-btn>
+                  <v-btn color="teal" to="/learn/lixiii" small dark :disabled="infos.expr < 40">Mulai <v-icon>play_arrow</v-icon></v-btn>
                 </p>
               </b-card>
             </b-col>
@@ -93,7 +93,7 @@
               class="text-center">
               <p class="card-text">
                 Require : Level 1 & Exp 60
-                <v-btn color="teal" small dark to="/learn/lixiv" :disabled="infos.exp < 60">Mulai <v-icon>play_arrow</v-icon></v-btn>
+                <v-btn color="teal" small dark to="/learn/lixiv" :disabled="infos.expr < 60">Mulai <v-icon>play_arrow</v-icon></v-btn>
               </p>
             </b-card>
           </b-col>
@@ -106,7 +106,7 @@
             class="text-center">
             <p class="card-text">
               Require : Level 1 & Exp 80
-              <v-btn color="teal" small dark :disabled="infos.exp < 80" to="/learn/lixv">Mulai <v-icon>play_arrow</v-icon></v-btn>
+              <v-btn color="teal" small dark :disabled="infos.expr < 80" to="/learn/lixv">Mulai <v-icon>play_arrow</v-icon></v-btn>
             </p>
           </b-card>
         </b-col>
@@ -132,7 +132,7 @@
             class="text-center">
             <p class="card-text">
               Require : Level 2 & Exp 100
-              <v-btn color="teal" small dark :disabled="infos.exp < 100">Mulai <v-icon>play_arrow</v-icon></v-btn>
+              <v-btn color="teal" small dark :disabled="infos.expr < 100" to="/learn/lixvi">Mulai <v-icon>play_arrow</v-icon></v-btn>
             </p>
           </b-card>
         </b-col>
@@ -145,7 +145,7 @@
           class="text-center">
           <p class="card-text">
             Require : Level 2 & Exp 125
-            <v-btn color="teal" small dark :disabled="infos.exp < 125">Mulai <v-icon>play_arrow</v-icon></v-btn>
+            <v-btn color="teal" small dark :disabled="infos.expr < 125">Mulai <v-icon>play_arrow</v-icon></v-btn>
           </p>
         </b-card>
       </b-col>
@@ -161,7 +161,7 @@
         class="text-center">
         <p class="card-text">
           Require : Level 2 & Exp 150
-          <v-btn color="teal" small dark :disabled="infos.exp < 150">Mulai <v-icon>play_arrow</v-icon></v-btn>
+          <v-btn color="teal" small dark :disabled="infos.expr < 150">Mulai <v-icon>play_arrow</v-icon></v-btn>
         </p>
       </b-card>
     </b-col>
@@ -174,7 +174,7 @@
       class="text-center">
       <p class="card-text">
         Require : Level 2 & Exp 175
-        <v-btn color="teal" small dark :disabled="infos.exp < 175">Mulai <v-icon>play_arrow</v-icon></v-btn>
+        <v-btn color="teal" small dark :disabled="infos.expr < 175">Mulai <v-icon>play_arrow</v-icon></v-btn>
       </p>
     </b-card>
   </b-col>
@@ -199,7 +199,7 @@
           class="text-center">
           <p class="card-text">
             Require : Level 3 & Exp 200
-            <v-btn color="teal" small dark :disabled="infos.exp < 200">Mulai <v-icon>play_arrow</v-icon></v-btn>
+            <v-btn color="teal" small dark :disabled="infos.expr < 200">Mulai <v-icon>play_arrow</v-icon></v-btn>
           </p>
         </b-card>
       </b-col>
@@ -212,7 +212,7 @@
         class="text-center">
         <p class="card-text">
           Require : Level 3 & Exp 250
-          <v-btn color="teal" small dark :disabled="infos.exp < 250">Mulai <v-icon>play_arrow</v-icon></v-btn>
+          <v-btn color="teal" small dark :disabled="infos.expr < 250">Mulai <v-icon>play_arrow</v-icon></v-btn>
         </p>
       </b-card>
     </b-col>
@@ -225,7 +225,7 @@
       class="text-center">
       <p class="card-text">
         Require : Level 3 & Exp 300
-        <v-btn color="teal" small dark :disabled="infos.exp < 300">Mulai <v-icon>play_arrow</v-icon></v-btn>
+        <v-btn color="teal" small dark :disabled="infos.expr < 300">Mulai <v-icon>play_arrow</v-icon></v-btn>
       </p>
     </b-card>
   </b-col>
@@ -241,8 +241,8 @@
 <script>
 import Toolbar from './Toolbar.vue'
 import Footer from './Footer.vue'
-import axios from 'axios'
-const memberR = 'http://localhost:3000/members/'
+// import axios from 'axios'
+// const memberR = 'http://localhost:3000/members/'
 export default {
   name: 'Dashboard',
   components: {
@@ -259,8 +259,10 @@ export default {
   },
   methods: {
     loadData: function () {
-      let asd = memberR + this.nilai
-      axios.get(asd).then(response => (this.infos = response.data))
+      const loggedIn = localStorage.getItem('user')
+      this.infos = JSON.parse(loggedIn)
+      // let asd = memberR + this.nilai
+      // axios.get(asd).then(response => (this.infos = response.data))
     }
   }
 }

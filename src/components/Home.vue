@@ -1,6 +1,6 @@
 <template>
 <div class="mar">
-<div class="container">
+<div class="container" style="text-align: center;">
 <ul class="nav flex-column">
 <li class="nav-item">
 <a class="nav-link menus"><router-link to="/daftar">Daftar</router-link></a>
