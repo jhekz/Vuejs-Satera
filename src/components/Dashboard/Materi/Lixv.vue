@@ -19,7 +19,6 @@
               class="mb-5 anim"
               color="teal lighten-1"
               >
-              {{kunci}}
               <v-container grid-list-xs,sm,md,lg,xl>
                 <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
                 <b-form-radio-group id="radios2" v-model="pilih" name="radioSubComponent">
@@ -94,7 +93,7 @@ const testR = 'http://localhost:3000/tests/'
 const testS = 'http://localhost:3000/tests'
 const Membs = 'http://localhost:3000/members/'
 export default {
-  name: 'Konversi',
+  name: 'Lixv',
   components: {
     'vtb': Toolbar,
     'vfoot': Footer

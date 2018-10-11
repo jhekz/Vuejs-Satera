@@ -110,7 +110,6 @@
           <v-btn
           color="teal"
           @click="explus"
-          to="/dashboard/belajar"
           >
           Selesai
         </v-btn>
@@ -131,7 +130,7 @@ const Aksara = 'http://localhost:3000/Konversis'
 const AksaraR = 'http://localhost:3000/Konversis/'
 const Membs = 'http://localhost:3000/members/'
 export default {
-  name: 'Konversi',
+  name: 'Lixiii',
   components: {
     'vtb': Toolbar,
     'vfoot': Footer

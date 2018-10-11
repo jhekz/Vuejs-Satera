@@ -122,7 +122,6 @@
           <v-btn
           color="teal"
           @click="explus"
-          to="/dashboard/belajar"
           >
           Selesai
         </v-btn>
@@ -141,7 +140,7 @@ import Footer from './../Footer.vue'
 import axios from 'axios'
 const Membs = 'http://localhost:3000/members/'
 export default {
-  name: 'Konversi',
+  name: 'Lixiv',
   components: {
     'vtb': Toolbar,
     'vfoot': Footer

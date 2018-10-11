@@ -40,7 +40,7 @@ const Membs = 'http://localhost:3000/members/'
 const belajarR = 'http://localhost:3000/belajars/'
 const belajarS = 'http://localhost:3000/belajars'
 export default {
-  name: 'Konversi',
+  name: 'Lixi',
   components: {
     'vtb': Toolbar,
     'vfoot': Footer

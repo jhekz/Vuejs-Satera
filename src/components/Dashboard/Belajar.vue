@@ -145,7 +145,7 @@
           class="text-center">
           <p class="card-text">
             Require : Level 2 & Exp 125
-            <v-btn color="teal" small dark :disabled="infos.expr < 125">Mulai <v-icon>play_arrow</v-icon></v-btn>
+            <v-btn color="teal" small dark :disabled="infos.expr < 125" to="/learn/lixvii">Mulai <v-icon>play_arrow</v-icon></v-btn>
           </p>
         </b-card>
       </b-col>
