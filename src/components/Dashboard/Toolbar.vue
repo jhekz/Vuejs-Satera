@@ -57,7 +57,6 @@ class="teal lighten-1"
 <v-spacer></v-spacer>
 <v-toolbar-items>
 <v-btn flat @click="hapus">
-<v-icon>settings_power</v-icon>
 <b>Keluar</b>
 </v-btn>
 </v-toolbar-items>

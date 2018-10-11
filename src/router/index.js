@@ -16,6 +16,8 @@ import Lixiv from '@/components/Dashboard/Materi/Lixiv'
 import Lixv from '@/components/Dashboard/Materi/Lixv'
 import Lixvi from '@/components/Dashboard/Materi/Lixvi'
 import Lixvii from '@/components/Dashboard/Materi/Lixvii'
+import Lixviii from '@/components/Dashboard/Materi/Lixviii'
+import Lixix from '@/components/Dashboard/Materi/Lixix'
 
 Vue.use(Router)
 
@@ -100,6 +102,16 @@ export default new Router({
       path: '/learn/lixvii',
       name: 'Lixvii',
       component: Lixvii
+    },
+    {
+      path: '/learn/lixviii',
+      name: 'Lixviii',
+      component: Lixviii
+    },
+    {
+      path: '/learn/lixix',
+      name: 'Lixix',
+      component: Lixix
     }
   ]
 })

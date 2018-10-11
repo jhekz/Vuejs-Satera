@@ -161,7 +161,7 @@
         class="text-center">
         <p class="card-text">
           Require : Level 2 & Exp 150
-          <v-btn color="teal" small dark :disabled="infos.expr < 150">Mulai <v-icon>play_arrow</v-icon></v-btn>
+          <v-btn color="teal" small dark :disabled="infos.expr < 150" to="/learn/lixviii">Mulai <v-icon>play_arrow</v-icon></v-btn>
         </p>
       </b-card>
     </b-col>
@@ -174,7 +174,7 @@
       class="text-center">
       <p class="card-text">
         Require : Level 2 & Exp 175
-        <v-btn color="teal" small dark :disabled="infos.expr < 175">Mulai <v-icon>play_arrow</v-icon></v-btn>
+        <v-btn color="teal" small dark :disabled="infos.expr < 175" to="/learn/lixix">Mulai <v-icon>play_arrow</v-icon></v-btn>
       </p>
     </b-card>
   </b-col>
@@ -199,7 +199,7 @@
           class="text-center">
           <p class="card-text">
             Require : Level 3 & Exp 200
-            <v-btn color="teal" small dark :disabled="infos.expr < 200">Mulai <v-icon>play_arrow</v-icon></v-btn>
+            <v-btn color="teal" small dark :disabled="infos.expr < 200" to="/learn/lixx">Mulai <v-icon>play_arrow</v-icon></v-btn>
           </p>
         </b-card>
       </b-col>
@@ -212,7 +212,7 @@
         class="text-center">
         <p class="card-text">
           Require : Level 3 & Exp 250
-          <v-btn color="teal" small dark :disabled="infos.expr < 250">Mulai <v-icon>play_arrow</v-icon></v-btn>
+          <v-btn color="teal" small dark :disabled="infos.expr < 250" to="/learn/lixxi">Mulai <v-icon>play_arrow</v-icon></v-btn>
         </p>
       </b-card>
     </b-col>
@@ -225,7 +225,7 @@
       class="text-center">
       <p class="card-text">
         Require : Level 3 & Exp 300
-        <v-btn color="teal" small dark :disabled="infos.expr < 300">Mulai <v-icon>play_arrow</v-icon></v-btn>
+        <v-btn color="teal" small dark :disabled="infos.expr < 300" to="/learn/lixxii">Mulai <v-icon>play_arrow</v-icon></v-btn>
       </p>
     </b-card>
   </b-col>
