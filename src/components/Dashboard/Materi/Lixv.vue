@@ -31,7 +31,7 @@
                     </b-col>
                     <b-col>
                       <b-form-radio value="B">
-                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwA}}</label>
+                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwB}}</label>
                         <label v-else-if="dataR.kategori === 1">{{dataR.jwB}}</label>
                       </b-form-radio>
                     </b-col>
@@ -141,7 +141,7 @@ export default {
       } else {
         this.jawaban.push(this.pilih)
         this.kunci.push(this.dataR.kunci)
-        if (this.nilai >= this.dataS.length) {
+        if (this.nilai >= 5) {
           this.nex = 1
         } else {
           this.nilai = this.nilai + 1

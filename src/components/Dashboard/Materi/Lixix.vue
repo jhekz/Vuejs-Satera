@@ -20,39 +20,98 @@
               color="teal lighten-1"
               >
               <v-container grid-list-xs,sm,md,lg,xl>
-                <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
-                <b-form-radio-group id="radios2" v-model="pilih" name="radioSubComponent">
-                  <b-row style="text-align:center;">
-                    <b-col>
-                      <b-form-radio value="A">
-                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwA}}</label>
-                        <label v-else-if="dataR.kategori === 1">{{dataR.jwA}}</label>
-                      </b-form-radio>
-                    </b-col>
-                    <b-col>
-                      <b-form-radio value="B">
-                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwA}}</label>
-                        <label v-else-if="dataR.kategori === 1">{{dataR.jwB}}</label>
-                      </b-form-radio>
-                    </b-col>
-                    <b-col>
-                      <b-form-radio value="C">
-                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwC}}</label>
-                        <label v-else-if="dataR.kategori === 1">{{dataR.jwC}}</label>
-                      </b-form-radio>
-                    </b-col>
-                    <b-col>
-                      <b-form-radio value="D">
-                        <label style="font-family:samawa;font-size:25pt;" v-if="dataR.kategori === 2">{{dataR.jwD}}</label>
-                        <label v-else-if="dataR.kategori === 1">{{dataR.jwD}}</label>
-                      </b-form-radio>
-                    </b-col>
-                  </b-row>
-                </b-form-radio-group>
+                <v-container v-if="dataR.kategori === 1">
+                  <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
+                  <b-form-radio-group id="radios2" v-model="pilih" name="radioSubComponent">
+                    <b-row style="text-align:left;">
+                      <b-col>
+                        <b-form-radio value="A">
+                          <label>{{dataR.jwA}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="B">
+                          <label>{{dataR.jwB}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="C">
+                          <label>{{dataR.jwC}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="D">
+                          <label>{{dataR.jwD}}</label>
+                        </b-form-radio>
+                      </b-col>
+                    </b-row>
+                  </b-form-radio-group>
+                </v-container>
+                <v-container v-else-if="dataR.kategori === 2">
+                  <div align="center">
+                    <textarea style="text-align: center;font-family: sumbawa;font-size: 20pt;" v-model="dataR.judul" disabled rows="5" cols="30"></textarea>
+                  </div>
+                  <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
+                  <b-form-radio-group id="radios2" v-model="pilih" name="radioSubComponent">
+                    <b-row style="text-align:left;">
+                      <b-col>
+                        <b-form-radio value="A">
+                          <label>{{dataR.jwA}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="B">
+                          <label>{{dataR.jwB}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="C">
+                          <label>{{dataR.jwC}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="D">
+                          <label>{{dataR.jwD}}</label>
+                        </b-form-radio>
+                      </b-col>
+                    </b-row>
+                  </b-form-radio-group>
+                </v-container>
+                <v-container v-else-if="dataR.kategori === 3">
+                  <p align="center">{{dataR.judul}}</p>
+                  <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
+                  <b-form-radio-group id="radios2" v-model="pilih" name="radioSubComponent">
+                    <b-row style="text-align:left;">
+                      <b-col>
+                        <b-form-radio value="A">
+                          <label style="font-family: samawa; font-size: 20pt;">{{dataR.jwA}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="B">
+                          <label style="font-family: samawa; font-size: 20pt;">{{dataR.jwB}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="C">
+                          <label style="font-family: samawa; font-size: 20pt;">{{dataR.jwC}}</label>
+                        </b-form-radio>
+                      </b-col>
+                      <b-col>
+                        <b-form-radio value="D">
+                          <label style="font-family: samawa; font-size: 20pt;">{{dataR.jwD}}</label>
+                        </b-form-radio>
+                      </b-col>
+                    </b-row>
+                  </b-form-radio-group>
+                </v-container>
+                <v-container v-else-if="dataR.kategori === 4">
+                  <p align="center">{{dataR.judul}}</p>
+                  <p>{{dataR.nomor}}. {{dataR.pertanyaan}}</p>
+                  <p align="center"><v-text-field v-model="pilih" class="satt" single-line width="30"></v-text-field></p>
+                </v-container>
                 <hr/>
                 <p align="center"><v-btn color="lime darken-1" small @click="cekL" :disabled="nex === 1">Berikut</v-btn></p>
-                <p align="center">Pilihan Saya: {{pilih}}</p>
-                <p align="center">Jawaban Saya : {{jawaban}}</p>
               </v-container>
             </v-card>
               <v-btn color="teal darken-5" dark @click="validasi" :disabled="nex === 0">Lanjutkan</v-btn>
@@ -142,10 +201,10 @@ export default {
       } else {
         this.jawaban.push(this.pilih)
         this.kunci.push(this.dataR.kunci)
-        if (this.nilai >= this.dataS.length) {
+        if (this.nilai2 >= 5) {
           this.nex = 1
         } else {
-          this.nilai = this.nilai + 1
+          this.nilai2 = this.nilai2 + 1
           this.readData()
           this.pilih = ''
         }
@@ -215,5 +274,10 @@ export default {
   opacity: 1;
   animation-name: zoom;
   animation-duration: 0.5s;
+}
+.satt{
+  font-family: samawa;
+  font-size: 20pt;
+  text-align: center;
 }
 </style>
