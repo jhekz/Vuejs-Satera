@@ -55,11 +55,11 @@ export default {
             router.replace('dashboard/dashboard')
             console.log(response.data)
           } else {
-            console.log(response)
+            console.log('Auth gagal')
           }
         })
         .catch(function (response) {
-          console.log(response)
+          console.log('Auth gagal')
           alert('email/password salah atau belum terdaftar')
         })
       console.log(this.result)

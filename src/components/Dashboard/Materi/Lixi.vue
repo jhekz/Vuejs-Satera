@@ -9,7 +9,7 @@
         color="teal"
         >
         <v-container align-center>
-          <h2 align="center">Pengenalan Satera Jontal</h2>
+          <h2 align="center" style="color: white;">Pengenalan Satera Jontal</h2>
           <v-card color="teal lighten-1" dark>
             <div class="container">
               <p align="justify">{{dataR.isi}}</p><br/>
@@ -25,7 +25,7 @@
             </div>
           </v-card>
         </v-container>
-        <v-btn color="teal" :disabled="nex === 0" @click="explus">Selesai</v-btn>
+        <v-btn color="teal" :disabled="nex === 0" dark @click="explus">Selesai</v-btn>
       </v-card>
     </v-container>
   </v-content>
@@ -68,7 +68,11 @@ export default {
       // this.form = this.infoku
       axios.get(belajarS).then(response => (this.dataS = response.data))
       const loggedIn = localStorage.getItem('user')
-      this.infous = JSON.parse(loggedIn)
+      if (loggedIn === null) {
+        router.replace('/login')
+      } else {
+        this.infous = JSON.parse(loggedIn)
+      }
       this.akun = this.infous._id
     },
     readData: function () {

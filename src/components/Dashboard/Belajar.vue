@@ -21,6 +21,7 @@
                   <div>{{infos.expr}}</div>
                 </div>
               </div>
+              <p>Selesaikan setiap materi dan test untuk menambah exp dan menaikkan level anda</p>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -239,6 +240,7 @@
 </div>
 </template>
 <script>
+import router from '../../router'
 import Toolbar from './Toolbar.vue'
 import Footer from './Footer.vue'
 // import axios from 'axios'
@@ -260,7 +262,11 @@ export default {
   methods: {
     loadData: function () {
       const loggedIn = localStorage.getItem('user')
-      this.infos = JSON.parse(loggedIn)
+      if (loggedIn === null) {
+        router.replace('/login')
+      } else {
+        this.infos = JSON.parse(loggedIn)
+      }
       // let asd = memberR + this.nilai
       // axios.get(asd).then(response => (this.infos = response.data))
     }

@@ -219,7 +219,11 @@ export default {
       // let asw = Membs + this.akun
       // axios.get(asw).then(response => (this.infoku = response.data))
       const loggedIn = localStorage.getItem('user')
-      this.infous = JSON.parse(loggedIn)
+      if (loggedIn === null) {
+        router.replace('/login')
+      } else {
+        this.infous = JSON.parse(loggedIn)
+      }
       this.akun = this.infous._id
     },
     lanjut: function () {

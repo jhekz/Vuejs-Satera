@@ -87,6 +87,7 @@
 <script>
 import Toolbar from './Toolbar.vue'
 import Footer from './Footer.vue'
+import router from '../../router'
 // import axios from 'axios'
 // const alamat = 'http://localhost:3000/members/'
 
@@ -118,7 +119,11 @@ export default {
   methods: {
     loadData: function () {
       const loggedIn = localStorage.getItem('user')
-      this.infous = JSON.parse(loggedIn)
+      if (loggedIn === null) {
+        router.replace('/login')
+      } else {
+        this.infous = JSON.parse(loggedIn)
+      }
       // alert(loggedIn.email)
       // let asd = alamat + this.nilai
       // axios.get(asd).then(response => (this.infos = response.data))

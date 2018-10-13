@@ -247,7 +247,11 @@ export default {
       // axios.get(asw).then(response => (this.infoku = response.data))
       // this.form = this.infoku
       const loggedIn = localStorage.getItem('user')
-      this.infous = JSON.parse(loggedIn)
+      if (loggedIn === null) {
+        router.replace('/login')
+      } else {
+        this.infous = JSON.parse(loggedIn)
+      }
       this.akun = this.infous._id
     },
     readData: function () {

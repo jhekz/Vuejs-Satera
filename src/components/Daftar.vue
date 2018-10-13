@@ -172,23 +172,32 @@ export default {
       console.log(this.form.password)
     },
     daftar: function () {
-      axios({
-        method: 'post',
-        url: Membs,
-        data: this.form,
-        config: { headers: {'Content-Type': 'application/json'} }
-      }).then(function (response) {
-        if (response.status === 200) {
-          alert('Daftar Berhasil!')
-          // console.log('Update Success')
-          // localStorage.setItem('user', JSON.stringify(response.data))
-          router.replace('/login')
-        } else {
-          alert('Daftar Gagal!' + response.data.errmsg)
-        }
-      }).catch(function (response) {
-        alert('Daftar Gagal!!' + '\n' + 'Email Sudah terdaftar')
-      })
+      var re = /^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/
+      // console.log(email)
+      // console.log(re.test(this.form.email))
+      if (re.test(this.form.email) === false) {
+        alert('Format Email Salah!!')
+      } else if (this.form.password.length < 3) {
+        alert('Password minimal 3 karakter')
+      } else {
+        axios({
+          method: 'post',
+          url: Membs,
+          data: this.form,
+          config: { headers: {'Content-Type': 'application/json'} }
+        }).then(function (response) {
+          if (response.status === 200) {
+            alert('Daftar Berhasil!')
+            // console.log('Update Success')
+            // localStorage.setItem('user', JSON.stringify(response.data))
+            router.replace('/login')
+          } else {
+            alert('Daftar Gagal!' + response.data.errmsg)
+          }
+        }).catch(function (response) {
+          alert('Email telah terdaftar atau' + '\n' + 'Data belum diisi dengan benar')
+        })
+      }
     }
   }
 }

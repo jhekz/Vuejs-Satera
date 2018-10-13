@@ -65,7 +65,7 @@
             color="teal lighten-1"
             >
             <v-container grid-list-xs,sm,md,lg,xl>
-              <h2>Hasil Test Level 1</h2>
+              <h2>Hasil Test Level 2</h2>
               <p v-if="valid === 1">
                 Selamat anda telah menjawab semua soal dengan benar!. Silahkan klik selesai untuk mempelajari materi selanjutnya!
               </p>
@@ -99,7 +99,8 @@ export default {
     'vfoot': Footer
   },
   data: () => ({
-    nilai: 1,
+    nilai: 100,
+    nilai2: 1,
     akun: '',
     pilih: '',
     jawaban: [],
@@ -131,7 +132,7 @@ export default {
       axios.get(testS).then(response => (this.dataS = response.data))
     },
     readData: function () {
-      let asd = testR + this.nilai
+      let asd = testR + this.nilai + this.nilai2
       axios.get(asd).then(response => (this.dataR = response.data))
       // this.pdata = this.dataR.length
     },
@@ -152,7 +153,7 @@ export default {
     },
     ulangi: function () {
       this.jawaban = []
-      this.nilai = 1
+      this.nilai2 = 1
       this.kunci = []
       this.readData()
       this.nex = 0
@@ -173,10 +174,9 @@ export default {
       }
     },
     explus: function () {
-      if (this.infous.expr < 100) {
+      if (this.infous.expr < 200) {
         const value = {
-          expr: 100,
-          level: 2
+          expr: 200
         }
         axios({
           method: 'put',

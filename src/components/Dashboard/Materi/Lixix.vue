@@ -123,7 +123,11 @@ export default {
       // let asw = Membs + this.akun
       // axios.get(asw).then(response => (this.infoku = response.data))
       const loggedIn = localStorage.getItem('user')
-      this.infous = JSON.parse(loggedIn)
+      if (loggedIn === null) {
+        router.replace('/login')
+      } else {
+        this.infous = JSON.parse(loggedIn)
+      }
       this.akun = this.infous._id
       axios.get(testS).then(response => (this.dataS = response.data))
     },
@@ -172,7 +176,8 @@ export default {
     explus: function () {
       if (this.infous.expr < 200) {
         const value = {
-          expr: 200
+          expr: 200,
+          level: 3
         }
         axios({
           method: 'put',

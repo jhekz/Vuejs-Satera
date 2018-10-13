@@ -6,10 +6,11 @@
       <v-container align-center>
         <div class="text-xs-center">
           <v-textarea
-          label="Tulis"
           v-model="nilai"
           style="font-family:sumbawa;font-size:20pt;text-align:center;"
           ></v-textarea>
+          <!-- <a href="./../../../static/simpangambar.html" target="_blank">ks</a> -->
+          <v-btn color="teal" dark href="./../../../static/simpangambar.html" target="_blank" @click="simgam"> Simpan <v-icon>save</v-icon></v-btn>
           <v-bottom-sheet v-model="sheet" hide-overlay inset class="hidden-md-and-down">
             <v-btn
             slot="activator"
@@ -104,6 +105,9 @@ export default {
     backing: function (e) {
       let pjg = this.nilai
       this.nilai = pjg.length ? pjg.substring(0, pjg.length - 1) : pjg
+    },
+    simgam: function () {
+      localStorage.setItem('tulisan', JSON.stringify(this.nilai))
     }
   }
 }

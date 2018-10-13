@@ -12,10 +12,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueHtml2Canvas from 'vue-html2canvas'
 // import 'roboto-fontface/css/roboto/roboto-fontface.css'
 Vue.use(BootstrapVue)
 Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
+Vue.use(VueHtml2Canvas)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

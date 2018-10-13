@@ -24,34 +24,38 @@
               color="teal lighten-1"
               >
               <v-container grid-list-xs,sm,md,lg,xl>
-                <h2 align="center">Satera Jontal Dalam Kosakata Sumbawa</h2>
-                <p align="justify">
-                   Menurut A. Hijaz HM. Satera Jontal dibawa oleh pedagang bugis dari makasar. Namun dalam perkembangannya, pengucapan dan logatnya mengalami perubahan sesuai dengan kegunaan dan wilayah masing-masing, sehingga ada satera jontal Ano Rawi untuk versi yang digunakan di wilayah Sumbawa bagian barat dan Satera Jontal versi Ano Siyop yang digunakan di wilayah Sumbawa bagian timur. Jadi, kedua versi satera jontal telah sesuai dengan bahasa masyarakat Sumbawa meskipun saat ini telah ditambahkan beberapa huruf dalam Satera Jontal untuk penyesuaiannya dengan zaman dan teknologi. Misalkan penambahan aksara "Za", "Tsa", "Dha" dll. dengan penambahan huruf tersebut maka akan memudahkan misalnya dalam membuat nama "Zubaidah" dalam bentuk satera jontal yang sebenarnya masyarakat sumbawa tetap menyebutnya "Subaidah". Oleh karena itu, pada materi ini kosakata-kosakata yang digunakan dalam pembelajaran satera jontal lebih lanjut akan menggunakan bahasa Sumbawa.
-                </p>
-                <p align="justify">Tekan tombol dibawah ini untuk menampilkan contoh kata dalam bahasa Sumbawa dan bentuknya dalam penulisan Satera Jontal.</p>
+                <h2 align="center">Menulis Lawas</h2>
+                <p align="justify"> Lawas adalah seni sastra Samawa, berupa untaian kata dengan ketentuan penggalan pada tiap barisnya. Lawas lebih mirip dengan puisi dan sajak, lawas menggunakan kata-kata yang bermakna konotasi luas, pemahaman dan penalarannya lebih membutuhkan ketelitian.
+                Sama seperti materi sebelumnya, hanya saja saat ini anda diharuskan dapat menulis lawas dalam bentuk satera jontal berdasarkan lawas dalam huruf latin</p>
                 <v-dialog v-model="dialogs3" fullscreen hide-overlay transition="dialog-bottom-transition">
                     <v-btn slot="activator" color="teal darken-1" dark>Contoh Kata</v-btn>
                     <v-card>
                         <v-card-title class="headline">Contoh Kata</v-card-title>
                         <v-card-text>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead style="background-color: teal; text-align: center; color: white;">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Latin</th>
-                                            <th>Satera Jontal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="index in dataKon.slice(95, 100).reverse()" :key="`a${index._id}`">
-                                            <td width="10%" align="center">{{index._id}}</td>
-                                            <td width="40%" align="center">{{index.latin}}</td>
-                                            <td width="50%" align="center" class="sattj">{{index.jontal}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <b-container class="bv-example-row">
+                                <b-row class="text-center">
+                                    <b-col>
+                                        <v-textarea
+                                        name="input-7-1"
+                                        label="Latin"
+                                        v-model="dataR.latin"
+                                        rows="7"
+                                        readonly
+                                        row-height="50"
+                                        ></v-textarea>
+                                    </b-col>
+                                    <b-col>
+                                        <v-textarea
+                                        class="satt"
+                                        name="input-7-1"
+                                        label="Latin"
+                                        v-model="dataR.jontal"
+                                        rows="7"
+                                        readonly
+                                        ></v-textarea>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -83,16 +87,41 @@
             >
             <v-container grid-list-xs,sm,md,lg,xl>
               <div>
-                <p align="center" style="font-family:sumbawa;font-size:50pt;">{{dataR.jontal}}</p><br/>
-                <div align="center"><b-form-input type="text" v-model="isi" class="col-md-1 pb-2" style="text-align: center;" :disabled="skor >= 15"></b-form-input></div><br/>
-                <div align="center"><b-button @click="lanjut" size="sm" variant="warning" :disabled="skor >= 15">Lanjut</b-button></div><br/>
+                <h4>Penting!</h4>
+                <ul>
+                <li>Selalu pastikan capslock dalam keadaan mati ketika menulis menggunakan satera jontal</li>
+                <li>Perhatikan ruang setiap baris</li>
+                </ul>
+                <b-row class="text-center">
+                    <b-col>
+                        <v-textarea
+                        name="input-7-1"
+                        label="Latin"
+                        v-model="dataR.latin"
+                        rows="7"
+                        readonly
+                        ></v-textarea>
+                    </b-col>
+                    <b-col>
+                        <v-textarea
+                        name="input-7-1"
+                        label="Satera Jontal"
+                        v-model="isi"
+                        rows="7"
+                        :disabled="skor >= 5"
+                        style="font-family: samawa;font-size: 20pt;"
+                        ></v-textarea>
+                    </b-col>
+                </b-row>
+                <br/>
+                <div align="center"><b-button @click="lanjut" size="sm" variant="warning" :disabled="skor >= 5">Lanjut</b-button></div><br/>
                 <p align="center"> Poin Saya : {{skor}}</p>
               </div>
             </v-container>
             </v-card>
             <v-btn
             color="red"
-            :disabled="skor < 15"
+            :disabled="skor < 5"
             @click="e1 = 3"
             >
             Lanjutkan
@@ -109,7 +138,7 @@
           <v-container grid-list-xs,sm,md,lg,xl>
             <h1 align="center">Selamat !!!</h1>
             <hr/>
-            <h3 align="center">Anda telah berhasil menulis kata dalam bahasa Sumbawa menggunakan font <i>Satera Jontal</i></h3>
+            <h3 align="center">Anda telah berhasil membaca lawas dalam bentuk <i>Satera Jontal</i></h3>
             <p>Klik selesai untuk kembali ke menu belajar</p>
           </v-container>
           </v-card>
@@ -133,7 +162,7 @@ import router from '../../../router'
 import Toolbar from './../Toolbar.vue'
 import Footer from './../Footer.vue'
 import axios from 'axios'
-const Aksara = 'http://localhost:3000/Konversis/'
+const Aksara = 'http://localhost:3000/Konversis'
 const AksaraR = 'http://localhost:3000/Konversis/'
 const Membs = 'http://localhost:3000/members/'
 export default {
@@ -155,8 +184,8 @@ export default {
     },
     dataR: [],
     isi: '',
-    nilai: 500,
-    nilai2: 1,
+    nilai: 700,
+    nilai2: 2,
     skor: 0
   }),
   mounted () {
@@ -186,17 +215,20 @@ export default {
         alert('Benar')
         this.skor = this.skor + 1
         this.isi = ''
-        var nn = Math.floor(Math.random() * (20 - 1 + 1)) + 1
+        var nn = Math.floor(Math.random() * (5 - 1 + 1)) + 1
         let asd = AksaraR + this.nilai + nn
         axios.get(asd).then(response => (this.dataR = response.data))
       } else {
+        console.log(this.dataR.latin)
+        console.log('--------------')
+        console.log(this.isi)
         alert('Masih salah')
       }
     },
     explus: function () {
-      if (this.infous.expr < 175) {
+      if (this.infous.expr < 300) {
         const value = {
-          expr: 175
+          expr: 300
         }
         axios({
           method: 'put',
@@ -235,13 +267,12 @@ export default {
   animation-name: zoom;
   animation-duration: 0.5s;
 }
-.sattj{
-    font-size: 20pt;
+.satt{
     font-family: samawa;
-}
-.sattj:hover{
     font-size: 20pt;
+}
+.satt:hover{
     font-family: arial;
-    color: red;
+    font-size: 12pt;
 }
 </style>
