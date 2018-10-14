@@ -33,6 +33,14 @@ export default {
   data () {
     return {
     }
+  },
+  mounted () {
+    this.load()
+  },
+  methods: {
+    load: function () {
+      localStorage.clear()
+    }
   }
 }
 </script>

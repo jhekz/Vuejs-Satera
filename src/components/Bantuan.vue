@@ -63,6 +63,14 @@ export default {
       }
       ]
     }
+  },
+  mounted () {
+    this.load()
+  },
+  methods: {
+    load: function () {
+      localStorage.clear()
+    }
   }
 }
 </script>

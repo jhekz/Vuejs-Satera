@@ -38,9 +38,12 @@ export default {
     result: []
   }),
   mounted () {
-    // this.login()
+    this.load()
   },
   methods: {
+    load: function () {
+      localStorage.clear()
+    },
     login: function () {
       const value = {
         email: this.email,

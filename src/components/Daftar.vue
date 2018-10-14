@@ -162,7 +162,13 @@ export default {
       }
     }
   },
+  mounted () {
+    this.load()
+  },
   methods: {
+    load: function () {
+      localStorage.clear()
+    },
     cek: function () {
       console.log(this.form.nama)
       console.log(this.form.username)
