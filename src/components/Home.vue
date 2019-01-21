@@ -78,7 +78,6 @@ a:hover{
 text-decoration: none;
 font-weight: bold;
 transition: 0.5s;
-color:red;
 }
 @keyframes move {
 from {
